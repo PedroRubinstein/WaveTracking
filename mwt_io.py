@@ -187,10 +187,10 @@ def draw(waves, frame, resize_factor):
 
     for wave in waves:
 
-        # For drawing circles on detected features
-        # center = (wave.centroid[0],wave.centroid[1])
-        # radius = 15
-        # cv2.circle(frame,center,radius,(0,255,0),2)
+        #For drawing circles on detected features
+        #center = (wave.centroid[0],wave.centroid[1])
+        #radius = 15
+        #cv2.circle(frame,center,radius,(0,255,0),2)
 
         if wave.death is None:
             # If wave is a wave, draw green, else yellow.
@@ -200,7 +200,8 @@ def draw(waves, frame, resize_factor):
                 text = (
                     f"Wave Detected!\n"
                     f"mass: { wave.mass}\n"
-                    f"displacement: {wave.displacement}"
+                    f"displacement: {wave.displacement}\n"
+                    f"height: {wave.height}"
                 )
 
             else:
@@ -208,16 +209,17 @@ def draw(waves, frame, resize_factor):
                 text = (
                     f"Potential Wave\n"
                     f"mass: {wave.mass}\n"
-                    f"displacement: {wave.displacement}"
+                    f"displacement: {wave.displacement}\n"
+                    f"height: {wave.height}"
                 )
 
             if len(wave.centroid_vec) > 20:
                 # Draw Bounding Boxes:
                 # Get boundingbox coors from wave objects and resize.
-                """
+                
                 rect = wave.boundingbox_coors
                 rect[:] = [resize_factor*rect[i] for i in range(4)]
-                frame = cv2.drawContours(frame, [rect], 0, drawing_color, 2)"""
+                frame = cv2.drawContours(frame, [rect], 0, drawing_color, 2)             
 
                 # Use moving averages of wave centroid for stat locations
                 moving_x = np.mean(

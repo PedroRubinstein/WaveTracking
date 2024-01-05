@@ -68,6 +68,7 @@ class Section(object):
             [self.displacement], maxlen=TRACKING_HISTORY
         )
         self.mass = len(self.points)
+        self.height = 1
         self.max_mass = self.mass
         self.recognized = False
         self.death = None
@@ -158,6 +159,7 @@ class Section(object):
         visualization purposes.
         """
         boundingbox_coors = None
+        
 
         if self.points is not None:
             # Obtain the moments of the object from its points array.
@@ -182,7 +184,7 @@ class Section(object):
             rect = cv2.minAreaRect(points_without_outliers)
             box = cv2.boxPoints(rect)
             boundingbox_coors = np.int0(box)
-
+            self.height = round(((boundingbox_coors[0][0] - boundingbox_coors[3][0]) ** 2 + (boundingbox_coors[0][1] - boundingbox_coors[3][1]) ** 2) ** 0.5, 2)
         self.boundingbox_coors = boundingbox_coors
 
         return

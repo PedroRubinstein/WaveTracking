@@ -138,6 +138,7 @@ def analyze(video, write_output=True):
                     wave.death,
                     wave.recognized,
                     wave.centroid,
+                    wave.height,
                 )
             )
 
@@ -200,6 +201,7 @@ def analyze(video, write_output=True):
                 f"Death: {wave.death}, "
                 f"Max Displacement: {wave.max_displacement}, "
                 f"Max Mass: {wave.max_mass}"
+                f"Max Height: implement"
             )
     else:
         print("No waves recognized.")
